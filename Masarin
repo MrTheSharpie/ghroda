@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<map proto="1.3.6">
+<name>Masarin II</name>
+<version>2.0</version>
+<objective>Leak lava from the enemy's obsidian core and destroy their obsidian monument for victory.</objective>
+<authors>
+	<author>ee864d09-99c7-4c3d-9e3e-852e51339107</author> 
+	<!-- MobbareKurtZ -->
+</authors>
+<contributors>
+	<contributor contribution="designing, building and major help">621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06</contributor> 
+	<!-- Strangey -->
+	<contributor contribution="designing and building help">62923e7c-371c-42f1-92f5-fc55b6c0f164</contributor> 
+	<!-- _felicia_ -->
+	<contributor contribution="building help">89f782c7-0869-4e8c-be22-fdff9ef4a0bc</contributor> 
+	<!-- mini_ann02 -->
+	<contributor contribution="designing help">dff980ed-9f69-491e-b79c-30c21350baf2</contributor> 
+	<!-- DoomRobotBoy -->
+	<contributor contribution="designing and building help">fe3608b7-d105-4029-8800-34b3147065b6</contributor> 
+	<!-- rockymine -->
+	<contributor contribution="feedback">48924ea3-3aad-4e16-838c-368d8d9e0a25</contributor> 
+	<!-- matic0basle -->
+	<contributor contribution="worldedit help">c2848337-b526-4db0-9130-fabd0a5c7cfb</contributor> 
+	<!-- Rasta_Jol -->
+	<contributor contribution="XML help">bb628049-e368-4b1c-b8aa-d4557ae9416b</contributor> 
+	<!-- Anthonny -->
+</contributors>
+<teams>
+	<team color="blue" max="75">Blue Team</team>
+	<team color="dark red" max="75">Red Team</team>
+</teams>
+<spawns>
+	<spawn team="red" kit="red">
+		<point yaw="45">
+            <cuboid min="-642,68,45" max="-646,68,41"/> <!-- North -->
+        </point>
+		<point yaw="45">
+            <cuboid min="-646,68,88" max="-642,68,84"/> <!-- South -->
+        </point>
+    </spawn>
+	<spawn team="blue" kit="blue">
+		<point yaw="-135">
+			<cuboid min="-1288,68,83" max="-1284,68,87"/> <!-- South -->
+		</point>
+		<point yaw="135">
+			<cuboid min="-1288,68,44" max="-1284,68,40"/> <!-- North -->
+		</point>
+	</spawn>
+	<default>
+		<point yaw="-90">
+			<cuboid min="-961,47,63" max="-969,47,65"/>
+		</point>
+		<point yaw="90">
+			<cuboid min="-961,47,63" max="-969,47,65"/>
+		</point>
+    </default>
+</spawns>
+<cores material="obsidian" leak="6">
+	<core team="blue">
+        <cuboid min="-1209,18,61" max="-1203,24,67"/>
+    </core>
+	<core team="red">
+        <cuboid min="-727,18,61" max="-721,24,67"/>
+    </core>
+</cores>
+<destroyables name="Monument" materials="obsidian" completion="100%">
+	<destroyable owner="blue">
+       <region><cuboid min="-1126,15,64" max="-1126,16,64"/></region>
+    </destroyable>
+	<destroyable owner="red">
+       <region><cuboid min="-804,15,64" max="-804,16,64"/></region>
+    </destroyable>
+</destroyables>
+<kits>
+	<kit name="spawn">
+		<item slot="0">iron sword</item>
+		<item slot="1">bow</item>
+		<item slot="28" amount="64">arrow</item>
+		<item slot="19" amount="64">arrow</item>
+		<item slot="2" enchantment="dig speed:1">diamond pickaxe</item>
+		<item slot="3">iron axe</item>
+		<item slot="4" amount="6">golden apple</item>
+		<item slot="5" amount="48">pumpkin pie</item>
+		<item slot="6" amount="64">log 2</item>
+		<item slot="7" amount="64">glass</item>
+		<item slot="8">bucket</item>
+	</kit>
+	<kit name="red" parents="spawn">
+		<chestplate color="993333" enchantment="durability:1">leather chestplate</chestplate>
+		<boots color="993333" enchantment="protection fall:3">leather boots</boots>
+	</kit>
+	<kit name="blue" parents="spawn">
+		<chestplate color="334CB2" enchantment="durability:1">leather chestplate</chestplate>
+		<boots color="334CB2" enchantment="protection fall:3">leather boots</boots>
+	</kit>
+</kits>
+<filters>
+	<filter name="deny-icemelt">
+		<not>
+			<all>
+				<any>
+					<filter name="allow-world"/>
+					<filter name="deny-all"/>
+				</any>
+				<block>ice</block>
+			</all>
+		</not>
+	</filter>
+	<filter name="no-void">
+		<not>
+			<void/>
+		</not>
+	</filter>
+	<filter name="only-red">
+		<team>red</team>
+	</filter>
+	<filter name="only-blue">
+		<team>blue</team>
+	</filter>
+</filters>
+<regions>
+	<apply block="no-void" message="You may not build in the void!">
+		<rectangle min="-oo,-oo" max="oo,oo"/>
+	</apply>
+	<apply block="deny-icemelt">
+		<region name="playable">
+			<cuboid min="-629,5,131" max="-1301,123,-3"/>
+		</region>
+	</apply>
+	<apply enter="deny-blocks" message="_You may not edit the observers spawn area!">
+		<cuboid min="-972,49,58" max="-958,56,70"/>
+	</apply>
+	<apply enter="only-red" block="only-red" message="You may not modify the ememy team's mountain!">
+		<cuboid name="red-spawn-mountain" min="-695,20,-3" max="-629,110,131"/>
+	</apply>
+	<apply enter="only-blue" block="only-blue" message="You may not modify the enemy team's mountain!">
+		<cuboid name="blue-spawn-mountain" min="-1235,20,131" max="-1301,110,-3"/>
+	</apply>
+</regions>
+<maxbuildheight>60</maxbuildheight>
+<toolrepair>
+	<tool>iron sword</tool>
+	<tool>diamond pickaxe</tool>
+	<tool>iron axe</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+	<item>leather chestplate</item>
+	<item>leather boots</item>
+	<item>glass</item>
+	<item>pumpkin pie</item>
+	<item>obsidian</item>
+	<item>string</item>
+	<item>seeds</item>
+	<item>flint</item>
+	<item>sapling</item>
+</itemremove>
+<renewables>
+	<renewable rate="2" grow="true" particles="true" sound="true" avoid-entities="true">
+		<region>
+			<cuboid min="-1256,36,115" max="-1239,56,100"/>
+			<cuboid min="-1253,35,9" max="-1238,56,25"/>
+			<cuboid min="-674,36,13" max="-690,56,13"/>
+			<cuboid min="-677,35,119" max="-692,56,103"/>
+		</region>
+		<renew>iron block</renew>
+	</renewable>
+</renewables>
+</map>
